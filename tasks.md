@@ -23,6 +23,7 @@ Work in order, one task per learning checkpoint. The student reviews and commits
   Implementation complete: shared App state, save/remove controls on Browse and details, /favorites, validated localStorage restoration, empty state and storage-failure notice. Eighteen tests, build and lint pass. Actual browser refresh/persistence verification remains pending.
   Done when: favorites can be added/removed from the app, /favorites is useful, localStorage survives refresh and invalid saved data does not crash the app; relevant logic tests pass.
 - [ ] 8. Comparison
+  Implementation complete: /compare fetches real options, supports two distinct choices, replacement/removal, empty/partial states and a responsive facts table. Twenty-two logic tests, build and lint pass. Browser interaction verification pending.
   Done when: /compare supports two selections, clear comparison fields, replacement/removal and partial/empty states; relevant logic tests pass.
 - [ ] 9. Responsive styling and accessibility
   Done when: original CSS works on desktop and narrow screens, inputs have labels, keyboard focus is visible and missing posters look intentional.

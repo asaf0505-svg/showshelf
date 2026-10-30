@@ -9,6 +9,7 @@ import type { Show } from './types/show'
 import { FAVORITES_KEY, parseFavorites, toggleFavorite } from './utils/favorites'
 import FavoritesPage from './pages/FavoritesPage'
 import StatusMessage from './components/StatusMessage'
+import ComparePage from './pages/ComparePage'
 
 function App() {
   const [favorites, setFavorites] = useState<Show[]>(() => {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/" element={<BrowsePage favorites={favorites} onToggleFavorite={handleToggleFavorite} />} />
         <Route path="/shows/:id" element={<ShowDetailsPage favorites={favorites} onToggleFavorite={handleToggleFavorite} />} />
         <Route path="/favorites" element={<FavoritesPage favorites={favorites} onToggleFavorite={handleToggleFavorite} />} />
+        <Route path="/compare" element={<ComparePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

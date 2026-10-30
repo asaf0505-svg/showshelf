@@ -7,6 +7,7 @@ export default function Navigation() {
       <nav aria-label="Main navigation">
         <NavLink to="/" end>Browse</NavLink>
         <NavLink to="/favorites">Favorites</NavLink>
+        <NavLink to="/compare">Compare</NavLink>
       </nav>
     </header>
   )
