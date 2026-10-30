@@ -1,17 +1,50 @@
 import ShowCard from '../components/ShowCard'
 import StatusMessage from '../components/StatusMessage'
-import { sampleShows } from '../data/sampleShows'
+import { useEffect, useState } from 'react'
+import type { Show } from '../types/show'
 
 export default function BrowsePage() {
+  const [shows, setShows] = useState<Show[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const [attempt, setAttempt] = useState(0)
+
+  useEffect(() => {
+    const controller = new AbortController()
+    async function loadShows() {
+      setLoading(true)
+      setError('')
+      try {
+        const response = await fetch('https://api.tvmaze.com/shows?page=0', { signal: controller.signal })
+        if (!response.ok) throw new Error(response.status === 429 ? 'Too many requests. Please wait a moment and try again.' : 'Could not load shows. Please try again.')
+        const data: Show[] = await response.json()
+        if (!Array.isArray(data)) throw new Error('Unexpected response from TVmaze.')
+        if (!controller.signal.aborted) setShows(data)
+      } catch (error) {
+        if (!controller.signal.aborted) setError(error instanceof Error ? error.message : 'Could not load shows.')
+      } finally {
+        if (!controller.signal.aborted) setLoading(false)
+      }
+    }
+    void loadShows()
+    return () => controller.abort()
+  }, [attempt])
+
   return (
     <main className="browse-page">
       <p className="eyebrow">YOUR NEXT WATCH STARTS HERE</p>
       <h1>Find your next favorite.</h1>
       <p>Explore stories worth making time for.</p>
-      <StatusMessage message="Preview: fictional sample shows. Live TVmaze data is coming in a later step." />
-      <section className="show-grid" aria-label="Sample shows">
-        {sampleShows.map((show) => <ShowCard key={show.id} show={show} />)}
-      </section>
+      <p>Browsing the first page of the TVmaze catalog.</p>
+      {loading && <StatusMessage message="Loading shows…" />}
+      {!loading && error && <div><StatusMessage message={error} /><button onClick={() => setAttempt(attempt + 1)}>Try again</button></div>}
+      {!loading && !error && shows.length === 0 && <StatusMessage message="No shows available." />}
+      {!loading && !error && shows.length > 0 && (
+        <section className="show-grid" aria-label="Shows">
+          {shows.map((show) => <ShowCard key={show.id} show={show} />)}
+        </section>
+      )}
+      <p className="source-credit">Show data from <a href="https://www.tvmaze.com/">TVmaze</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a></p>
     </main>
   )
 }

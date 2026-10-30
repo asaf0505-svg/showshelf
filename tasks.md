@@ -14,6 +14,7 @@ Work in order, one task per learning checkpoint. The student reviews and commits
   Implementation complete: BrowserRouter, Routes, Link/NavLink, /shows/:id with useParams, and unknown-page/show fallbacks. Build/lint and a temporary MemoryRouter render check passed (three direct detail routes, list links, zero/null values, four invalid IDs and unknown route). Real browser click/refresh verification and student review remain pending; task is not marked fully complete.
   Done when: Browse and /shows/:id work with Link/NavLink and useParams, direct detail refresh works, and unknown IDs/routes have clear fallbacks.
 - [ ] 5. Real API integration
+  Implementation complete: real list/detail fetches inside useEffect, cancellation, loading/error/retry, 404/invalid-ID handling, text-only summaries, poster fallbacks and TVmaze credit. Fixtures removed. Build/lint passed; live browser verification pending after browser-control safety stop. Publication authorized by the user's GitHub upload request.
   Done when: fetch inside useEffect replaces fixtures, list/details display real data, and loading/error/retry/missing-data cases work.
 - [ ] 6. Search, genre filters and first tests
   Done when: SearchFilters is a separate typed component, local search scope is visible, empty results work, and meaningful Vitest tests run with npm test and npm run test:ui.

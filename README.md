@@ -3,7 +3,9 @@
 A TV show guide built with React + Vite + TypeScript. English interface; browsing, details, favorites and comparison are planned.
 
 ## Current stage
-A Browse preview renders three explicitly fictional sample shows. BrowsePage maps the data into ShowCard components with unique keys and typed props. Clicking a show title links to `/shows/:id`, where ShowDetailsPage reads the ID with useParams and finds the fixture. BrowserRouter is set up in main.tsx, and App.tsx defines the routes. Navigation uses Link/NavLink. Missing data, unknown show IDs and unknown page addresses have fallbacks. Real API integration, favorites, comparison and unit tests belong to later tasks.
+Browse and show details now request real TVmaze data using fetch inside useEffect. Loading, errors, retry, empty results and missing shows have visible states. Requests are cancelled on unmount. API summaries are displayed as text, and missing or broken posters have a fallback. The fictional fixtures were removed. BrowserRouter is set up in main.tsx, and App.tsx defines the routes; details use useParams. Favorites, comparison, search/filtering and Vitest remain to be implemented.
+
+Latest verification: the real-data implementation passes build and lint. Live browser behavior is not yet verified: the in-app browser could not reach localhost, and native Chrome automation stopped because it could not confidently determine the browser URL. Earlier fixture/render checks below are historical, not evidence that the new asynchronous screens pass browser tests.
 
 ## Run
 With a current Node.js LTS release and npm installed:

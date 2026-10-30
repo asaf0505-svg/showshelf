@@ -10,6 +10,11 @@ a { color: #c7baff; text-underline-offset: 4px; }
 .show-facts dt { color: #bdc2d2; }
 .show-facts dd { margin: 0; }
 a:focus-visible { outline: 3px solid #b4a5ff; outline-offset: 6px; }
+button { font: inherit; background: #c7baff; color: #141725; padding: 10px 18px; border: 0; border-radius: 6px; cursor: pointer; }
+button:focus-visible { outline: 3px solid #f5d88c; outline-offset: 4px; }
+.source-credit { margin-top: 32px; color: #bdc2d2; font-size: 0.9rem; }
+.show-details { margin-top: 24px; }
+.card-summary { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .browse-page { max-width: 1120px; margin: 0 auto; padding: 48px 24px; }
 .eyebrow { color: #b4a5ff; font-size: 0.8rem; letter-spacing: 0.12em; }
 h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.15; margin: 16px 0; }
