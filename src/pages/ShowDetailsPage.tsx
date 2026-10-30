@@ -4,14 +4,16 @@ import type { Show } from '../types/show'
 import StatusMessage from '../components/StatusMessage'
 import ShowPoster from '../components/ShowPoster'
 import { summaryToText } from '../utils/summary'
+import type { FavoritesProps } from '../types/favorites'
+import FavoriteButton from '../components/FavoriteButton'
 
-export default function ShowDetailsPage() {
+export default function ShowDetailsPage({ favorites, onToggleFavorite }: FavoritesProps) {
   const { id } = useParams()
   // Remount when the URL changes so old details cannot appear for a new ID.
-  return <ShowDetailsContent key={id} id={id} />
+  return <ShowDetailsContent key={id} id={id} favorites={favorites} onToggleFavorite={onToggleFavorite} />
 }
 
-function ShowDetailsContent({ id }: { id: string | undefined }) {
+function ShowDetailsContent({ id, favorites, onToggleFavorite }: FavoritesProps & { id: string | undefined }) {
   // The URL supplies text. Only accept positive whole-number IDs.
   const showId = id && /^[1-9]\d*$/.test(id) ? Number(id) : null
   const validId = showId !== null && Number.isSafeInteger(showId)
@@ -68,6 +70,7 @@ function ShowDetailsContent({ id }: { id: string | undefined }) {
         <ShowPoster src={show.image?.original} name={show.name} />
         <section aria-labelledby="show-title">
           <h1 id="show-title">{show.name}</h1>
+          <FavoriteButton selected={favorites.some(item => item.id === show.id)} name={show.name} onToggle={() => onToggleFavorite(show)} />
           <p>{summaryToText(show.summary)}</p>
           <dl className="show-facts">
             <dt>Genres</dt><dd>{show.genres.join(', ') || 'Not available'}</dd>

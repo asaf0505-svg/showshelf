@@ -6,6 +6,7 @@ export default function Navigation() {
       <Link className="brand" to="/">ShowShelf</Link>
       <nav aria-label="Main navigation">
         <NavLink to="/" end>Browse</NavLink>
+        <NavLink to="/favorites">Favorites</NavLink>
       </nav>
     </header>
   )
