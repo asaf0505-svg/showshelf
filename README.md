@@ -1,77 +1,56 @@
 # ShowShelf
 
-A TV show guide built with React + Vite + TypeScript. English interface; browsing, details, favorites and comparison are planned.
-
-## Current stage
-Browse and show details now request real TVmaze data using fetch inside useEffect. Loading, errors, retry, empty results and missing shows have visible states. Requests are cancelled on unmount. API summaries are displayed as text, and missing or broken posters have a fallback. The fictional fixtures were removed. BrowserRouter is set up in main.tsx, and App.tsx defines the routes; details use useParams. Name search, genre filtering and Vitest logic tests are now implemented. Favorites are now implemented; comparison is now implemented.
-
-Latest verification: the real-data implementation passes build and lint. Live browser behavior is not yet verified: the in-app browser could not reach localhost, and native Chrome automation stopped because it could not confidently determine the browser URL. Earlier fixture/render checks below are historical, not evidence that the new asynchronous screens pass browser tests.
+A front-end TV guide built with React, Vite, TypeScript and React Router. Browse live TVmaze shows, search/filter the loaded catalog, save favorites and compare two shows. English interface, original responsive CSS, no backend or API key.
 
 ## Run
-With a current Node.js LTS release and npm installed:
+Use a current Node.js LTS version with npm.
 
 ```sh
-npm install
+npm ci
 npm run dev
+npm test
+npm run test:ui
 npm run build
 npm run lint
-npm run preview
 ```
 
-This machine exposes Node but no npm command. A workspace-local npm runtime was downloaded outside this repository. From this ShowShelf folder, the local equivalent is:
+Open the URL printed by Vite. On the development machine the verified running server is http://127.0.0.1:5174/. It is local, not a public deployment; it stops when the server process stops. If npm is unavailable in this particular workspace, use `node ../../work/npm-runtime/package/bin/npm-cli.js` in place of `npm`. Other computers should use a normal Node/npm installation.
 
-```sh
-node ../../work/npm-runtime/package/bin/npm-cli.js run dev
-```
+## Pages
+| Route | Purpose |
+| --- | --- |
+| `/` | Browse the first API page; name search and genre filter work together |
+| `/shows/:id` | Directly addressable details, source link and favorite toggle |
+| `/favorites` | Saved shows with remove controls and an empty state |
+| `/compare` | Two distinct selections, facts table, replacement/removal and clear action |
 
-Replace `run dev` with `run build` or `run lint` as needed. This fallback is specific to this workspace; other machines with npm do not need it.
+Favorites are stored only in this browser's localStorage, under `showshelf-favorites`. Saved summaries are snapshots; details fetch current information. Invalid stored entries are discarded. Storage errors display a notice while keeping this visit usable. Comparison selections reset when leaving the page or refreshing.
 
-## Tests
-Setup verification: production build and lint completed successfully. Original agent instructions and hook/script files were verified unchanged. Browser rendering and automatic hook activation have not yet been verified.
+## API and attribution
+- https://api.tvmaze.com/shows?page=0
+- https://api.tvmaze.com/shows/{id}
+- Documentation: https://www.tvmaze.com/api
 
-After the sample-list implementation, build and lint passed again. Visual rendering has not been verified: the in-app browser could not reach the local server using either localhost or 127.0.0.1. The sample includes rating 0 to make the distinction between a valid zero and a missing (null) rating easy to inspect. In the browser, check that there are three cards, the zero appears as `0 / 10`, the missing rating says `Not available`, and the grid fits a narrow window.
+Search and comparison options cover the loaded first page, not the full catalog. At verification it contained 240 shows. Requests run inside useEffect with cancellation and loading/error/retry handling. Summaries are converted to plain text; missing or broken posters have a fallback. Data is credited to TVmaze in the UI and is subject to its CC BY-SA terms. No API key, login, proxy or server is used.
 
-Vitest and its UI are installed. Run `npm test` for a single test run or `npm run test:ui` for the interactive runner. Ten tests pass for name search, genre filtering, combined filters, clearing search, missing/empty data, non-mutation and unique sorted genres. Build and lint also pass. The interactive UI has not yet been checked in a browser.
+## Verification
+32 Vitest tests pass: 22 logic tests and 10 component interaction tests. Component tests use jsdom and mocked API responses. Production build and lint pass. `test:ui` starts the Vitest UI successfully; all 32 tests also passed on that invocation.
 
-## Comparison
-`/compare` loads the same first catalog page and allows two different selections. A table compares rating, genres, status and schedule. Change either selector to replace a show, choose its empty option to remove it, or clear both. Selections intentionally reset when leaving the page or refreshing. Twenty-two logic tests, build and lint pass after this step; browser checks remain pending.
+Real in-app browser checks on 30 October 2026 verified live list/detail API requests, 240 loaded shows, filtering/clear/no-results, detail refresh, favorite save/refresh/remove, comparison, invalid routes and narrow-screen layout at 390px. No console errors or warnings were observed in that session. The server had to run outside the isolated execution sandbox for browsers to reach it. See [verification record](docs/verification.md) for limits and evidence.
 
-## Favorites
-Favorites now live in App state and are passed to pages via typed props. Save/remove buttons are available on cards and details. `/favorites` displays saved shows and an empty state. Each change is serialized to `showshelf-favorites` in localStorage; startup restores validated entries and drops invalid or duplicate records. A failed storage write leaves this visit's state usable and displays a warning. Saved summaries are snapshots; opening details fetches fresh information. Favorites are local to this browser, not synced across devices or open tabs.
+## Project documents
+- [Requirements](PRD.md)
+- [Task sequence](tasks.md)
+- [Architecture and data flow](docs/architecture.md)
+- [Defense guide in Hebrew](docs/defense-guide.md)
+- [Prompt log](PROMPTS.md)
+- [Original starter instructions](STARTER-README.md)
 
-Verification: 18 unit tests pass (10 search/filter tests and 8 favorite parsing/toggling tests), as do build and lint. End-to-end browser persistence and visual checks remain pending. Comparison is the next feature.
-
-## Search and filtering
-Browse now has labeled name search, a genre selector, a clear-filters button and a result count. Both filters apply together to the loaded first page only. Search ignores case and surrounding spaces. A message appears when there are no matches. BrowsePage owns the two state values, passes them and change handlers to SearchFilters, and uses the pure filterShows function to calculate the visible list. This feature does not send a network request for each keystroke. Comparison is now implemented.
-
-## Routing checks
-After adding routing, build and lint passed. A temporary render check outside the repository verified the three direct detail URLs, card links, zero and missing values, invalid show IDs and unknown pages using MemoryRouter. This does not count as the required Vitest suite and does not verify browser clicks or refreshes.
-
-To check manually, start the dev server, click a series title, return using Browse, then open and refresh `/shows/2`. Check `/shows/abc` and `/unknown`. These should show “Show not found” and “Page not found”, respectively. Browser verification remains pending because the in-app browser cannot reach the local server. Production hosting must serve index.html for application routes so direct links and refreshes work; public GitHub source hosting alone is not an application deployment.
-
-Routing reference: https://reactrouter.com/start/declarative/routing
-
-## Planned API
-Reference: https://www.tvmaze.com/api
-- List: https://api.tvmaze.com/shows?page=0
-- Details: https://api.tvmaze.com/shows/1 (replace 1 with the selected ID)
-- Search/filtering initially covers only the loaded list, not the entire catalog.
-- Response inspection and attribution review are recorded in [API verification](docs/api-verification.md). Actual cross-origin browser fetch is still pending; direct JSON navigation passed.
-
-## Workflow
-Read PRD.md for requirements and tasks.md for the sequence. Keep the code simple and explainable. AGENTS.md normally reserves commits for the student. On 30 October 2026 the student explicitly asked the assistant to upload the project to GitHub, authorizing this initial publication. The accumulated setup and routing work is recorded as one honest snapshot, not retroactively split into an invented sequence of commits. Student review and browser verification remain pending.
-
-## Starter and prompt logging
-Original: https://github.com/YarivGilad/react-project-starter
-The original README is preserved as STARTER-README.md. Instructions, hooks and scripts remain intact.
-
-This chat began outside the new repository, so the current message could not trigger its hook. The assistant passed the current user message verbatim to the original logger and verified the complete entry. It is labeled `codex-manual-bootstrap` with Asia/Jerusalem time. No earlier messages were reconstructed.
-
-This verifies the script, NOT automatic hook execution in this chat. Open ShowShelf as the active project and send a new message, then inspect PROMPTS.md before the next development task. If the hook does not run, use the original README's documented fallback and record that fact. No student testing/reflection note has been invented.
-
-## GitHub
+## Git history and prompt log
 Public repository: https://github.com/asaf0505-svg/showshelf
 
-Created from the course template on 30 October 2026. The original template files and initial repository commit are preserved. This repository contains source code; it is not a deployed website. The first application snapshot includes the current planning, sample list and routing work, with incomplete checks documented above.
+Created from the course template. Original hooks, scripts and AGENTS.md were preserved. The user explicitly authorized GitHub uploads and later continuous work. The first accumulated setup/routing work was published as one honest snapshot; subsequent features were committed separately. Earlier steps were not retroactively split into invented commits.
 
+This chat began outside the repository. Automatic hook execution has not been verified; current development prompts were passed to the original logger with explicit `codex-manual-bootstrap` / `codex-manual-fallback` labels. Earlier planning messages were not reconstructed. This limitation is disclosed, not presented as a complete automatic history. The student still needs to add their own truthful testing/reflection notes, review the work and practice the defense.
 
+The repository is source hosting, not a deployed website. A production host must serve index.html for application routes to support direct detail URLs and refreshes. Deployment is not required by the supplied assignment.
