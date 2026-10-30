@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react'
 import type { Show } from '../types/show'
 import SearchFilters from '../components/SearchFilters'
 import { filterShows, getGenres } from '../utils/filterShows'
+import type { FavoritesProps } from '../types/favorites'
 
-export default function BrowsePage() {
+export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesProps) {
   const [shows, setShows] = useState<Show[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -53,7 +54,7 @@ export default function BrowsePage() {
             <p>No shows match your filters. Try a different name or clear the filters.</p>
           ) : (
             <section className="show-grid" aria-label="Shows">
-              {filteredShows.map((show) => <ShowCard key={show.id} show={show} />)}
+              {filteredShows.map((show) => <ShowCard key={show.id} show={show} isFavorite={favorites.some(item => item.id === show.id)} onToggleFavorite={onToggleFavorite} />)}
             </section>
           )}
         </>

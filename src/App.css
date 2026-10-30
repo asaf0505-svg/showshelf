@@ -2,6 +2,7 @@
 .site-header a { color: #f3f4fb; text-decoration: none; }
 .brand { font-size: 1.5rem; font-weight: bold; }
 .site-header nav a { padding-bottom: 6px; }
+.site-header nav { display: flex; flex-wrap: wrap; gap: 20px; }
 .site-header nav a.active { border-bottom: 2px solid #b4a5ff; }
 a { color: #c7baff; text-underline-offset: 4px; }
 .card-content h2 a { color: inherit; }

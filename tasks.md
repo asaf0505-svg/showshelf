@@ -20,6 +20,7 @@ Work in order, one task per learning checkpoint. The student reviews and commits
   Implementation complete: labeled SearchFilters, combined name/genre filtering, clear action, result count, empty state and explicit loaded-page scope. Ten Vitest logic tests, build and lint passed. npm test and npm run test:ui are configured; interactive browser/UI verification is still pending.
   Done when: SearchFilters is a separate typed component, local search scope is visible, empty results work, and meaningful Vitest tests run with npm test and npm run test:ui.
 - [ ] 7. Favorites
+  Implementation complete: shared App state, save/remove controls on Browse and details, /favorites, validated localStorage restoration, empty state and storage-failure notice. Eighteen tests, build and lint pass. Actual browser refresh/persistence verification remains pending.
   Done when: favorites can be added/removed from the app, /favorites is useful, localStorage survives refresh and invalid saved data does not crash the app; relevant logic tests pass.
 - [ ] 8. Comparison
   Done when: /compare supports two selections, clear comparison fields, replacement/removal and partial/empty states; relevant logic tests pass.
