@@ -6,17 +6,17 @@ Help TV viewers browse shows, keep favorites and compare two options. This is a 
 ## Pages
 | Route | Page | User actions |
 | --- | --- | --- |
-| `/` | Browse | Search loaded shows by name, filter by genre, open details, select favorites or comparison candidates |
+| `/` | Browse | Search loaded shows by name, filter by genre, open details, save favorites |
 | `/shows/:id` | Show Details | View poster, summary, genres, rating, status and schedule; add/remove favorite |
 | `/favorites` | Favorites | View saved shows, open details, remove favorites |
 | `/compare` | Compare | Select up to two shows, compare rating/genres/status/schedule, replace or remove a selection |
 
 ## Simple implementation
-React + Vite + TypeScript; React Router for navigation and useParams; native CSS. Use useState and props rather than a state-management library. App owns shared favorites and comparison selections. Store favorite show summaries in localStorage and validate stored data before use. Comparison selections can reset on refresh. Each of at least four shared components (Navigation, ShowCard, SearchFilters, StatusMessage) has its own file and typed props. Types must represent nullable API fields; no any.
+React + Vite + TypeScript; React Router for navigation and useParams; native CSS. Use useState and props rather than a state-management library. App owns shared favorites; ComparePage owns its local comparison selections. Store favorite show summaries in localStorage and validate stored data before use. Comparison selections reset on leaving the page or refreshing. Each of at least four shared components (Navigation, ShowCard, SearchFilters, StatusMessage) has its own file and typed props. Types must represent nullable API fields; no any.
 
 Fetch inside useEffect, check response.ok, and clean up pending requests. Render lists with map and show.id as key. Show loading, error/retry, success and empty states. Missing images have a placeholder; missing rating/schedule display “Not available”. Handle invalid/missing show IDs and unknown routes. Render API summaries as plain text, not raw HTML.
 
-## API plan — must be verified in a browser before integration
+## API
 - List: `https://api.tvmaze.com/shows?page=0`
 - Details: `https://api.tvmaze.com/shows/{id}`
 - Reference: https://www.tvmaze.com/api
@@ -33,3 +33,9 @@ Fetch inside useEffect, check response.ok, and clean up pending requests. Render
 
 ## Delivery
 Public GitHub repository with README, PRD, tasks and an honest PROMPTS log, gradual commits, no console errors. Submission: 5 November 2026 at 10:00 Asia/Jerusalem. Prepare to explain state, props, effects, routes, API data and unit tests in the personal defense.
+
+## Supporting documents
+- [Architecture](docs/architecture.md)
+- [Verification](docs/verification.md)
+- [Defense guide](docs/defense-guide.md)
+

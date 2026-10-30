@@ -33,3 +33,7 @@ Directly opening JSON verifies availability and response shape, not browser CORS
 
 ## Workflow status
 The current message was logged through the original script as codex-manual-fallback because the repository hook did not automatically record it. Automatic logging still requires verification in an active project session. No student checks or reflection were invented, and no commit was made by the assistant.
+
+## Resolved in final verification
+On 30 October 2026, running Vite outside the isolated sandbox on port 5174 made it reachable. The actual app fetched 240 shows and individual details in the browser, confirming cross-origin access. See verification.md for the full observed checks. Earlier connection failures above are historical.
+
