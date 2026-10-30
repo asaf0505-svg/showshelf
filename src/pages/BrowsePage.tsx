@@ -2,12 +2,18 @@ import ShowCard from '../components/ShowCard'
 import StatusMessage from '../components/StatusMessage'
 import { useEffect, useState } from 'react'
 import type { Show } from '../types/show'
+import SearchFilters from '../components/SearchFilters'
+import { filterShows, getGenres } from '../utils/filterShows'
 
 export default function BrowsePage() {
   const [shows, setShows] = useState<Show[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [attempt, setAttempt] = useState(0)
+  const [query, setQuery] = useState('')
+  const [genre, setGenre] = useState('')
+  const filteredShows = filterShows(shows, query, genre)
+  const genres = getGenres(shows)
 
   useEffect(() => {
     const controller = new AbortController()
@@ -35,14 +41,22 @@ export default function BrowsePage() {
       <p className="eyebrow">YOUR NEXT WATCH STARTS HERE</p>
       <h1>Find your next favorite.</h1>
       <p>Explore stories worth making time for.</p>
-      <p>Browsing the first page of the TVmaze catalog.</p>
+      <p>Search and filters apply only to the loaded first page of the TVmaze catalog.</p>
       {loading && <StatusMessage message="Loading shows…" />}
       {!loading && error && <div><StatusMessage message={error} /><button onClick={() => setAttempt(attempt + 1)}>Try again</button></div>}
       {!loading && !error && shows.length === 0 && <StatusMessage message="No shows available." />}
       {!loading && !error && shows.length > 0 && (
-        <section className="show-grid" aria-label="Shows">
-          {shows.map((show) => <ShowCard key={show.id} show={show} />)}
-        </section>
+        <>
+          <SearchFilters query={query} genre={genre} genres={genres} onQueryChange={setQuery} onGenreChange={setGenre} onClear={() => { setQuery(''); setGenre('') }} />
+          <StatusMessage message={`${filteredShows.length} of ${shows.length} shows`} />
+          {filteredShows.length === 0 ? (
+            <p>No shows match your filters. Try a different name or clear the filters.</p>
+          ) : (
+            <section className="show-grid" aria-label="Shows">
+              {filteredShows.map((show) => <ShowCard key={show.id} show={show} />)}
+            </section>
+          )}
+        </>
       )}
       <p className="source-credit">Show data from <a href="https://www.tvmaze.com/">TVmaze</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a></p>
     </main>
