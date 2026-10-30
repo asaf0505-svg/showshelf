@@ -3,7 +3,7 @@
 A TV show guide built with React + Vite + TypeScript. English interface; browsing, details, favorites and comparison are planned.
 
 ## Current stage
-Browse and show details now request real TVmaze data using fetch inside useEffect. Loading, errors, retry, empty results and missing shows have visible states. Requests are cancelled on unmount. API summaries are displayed as text, and missing or broken posters have a fallback. The fictional fixtures were removed. BrowserRouter is set up in main.tsx, and App.tsx defines the routes; details use useParams. Favorites, comparison, search/filtering and Vitest remain to be implemented.
+Browse and show details now request real TVmaze data using fetch inside useEffect. Loading, errors, retry, empty results and missing shows have visible states. Requests are cancelled on unmount. API summaries are displayed as text, and missing or broken posters have a fallback. The fictional fixtures were removed. BrowserRouter is set up in main.tsx, and App.tsx defines the routes; details use useParams. Name search, genre filtering and Vitest logic tests are now implemented. Favorites and comparison remain to be implemented.
 
 Latest verification: the real-data implementation passes build and lint. Live browser behavior is not yet verified: the in-app browser could not reach localhost, and native Chrome automation stopped because it could not confidently determine the browser URL. Earlier fixture/render checks below are historical, not evidence that the new asynchronous screens pass browser tests.
 
@@ -31,7 +31,10 @@ Setup verification: production build and lint completed successfully. Original a
 
 After the sample-list implementation, build and lint passed again. Visual rendering has not been verified: the in-app browser could not reach the local server using either localhost or 127.0.0.1. The sample includes rating 0 to make the distinction between a valid zero and a missing (null) rating easy to inspect. In the browser, check that there are three cards, the zero appears as `0 / 10`, the missing rating says `Not available`, and the grid fits a narrow window.
 
-Vitest and its UI will be introduced with application logic in task 6. `npm test` and `npm run test:ui` are not configured yet. No unit-test results are claimed now.
+Vitest and its UI are installed. Run `npm test` for a single test run or `npm run test:ui` for the interactive runner. Ten tests pass for name search, genre filtering, combined filters, clearing search, missing/empty data, non-mutation and unique sorted genres. Build and lint also pass. The interactive UI has not yet been checked in a browser.
+
+## Search and filtering
+Browse now has labeled name search, a genre selector, a clear-filters button and a result count. Both filters apply together to the loaded first page only. Search ignores case and surrounding spaces. A message appears when there are no matches. BrowsePage owns the two state values, passes them and change handlers to SearchFilters, and uses the pure filterShows function to calculate the visible list. This feature does not send a network request for each keystroke. Favorites and comparison remain pending.
 
 ## Routing checks
 After adding routing, build and lint passed. A temporary render check outside the repository verified the three direct detail URLs, card links, zero and missing values, invalid show IDs and unknown pages using MemoryRouter. This does not count as the required Vitest suite and does not verify browser clicks or refreshes.
@@ -62,3 +65,4 @@ This verifies the script, NOT automatic hook execution in this chat. Open ShowSh
 Public repository: https://github.com/asaf0505-svg/showshelf
 
 Created from the course template on 30 October 2026. The original template files and initial repository commit are preserved. This repository contains source code; it is not a deployed website. The first application snapshot includes the current planning, sample list and routing work, with incomplete checks documented above.
+

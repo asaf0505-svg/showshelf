@@ -15,6 +15,11 @@ button:focus-visible { outline: 3px solid #f5d88c; outline-offset: 4px; }
 .source-credit { margin-top: 32px; color: #bdc2d2; font-size: 0.9rem; }
 .show-details { margin-top: 24px; }
 .card-summary { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.search-filters { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; margin: 24px 0; }
+.search-filters label { display: flex; flex-direction: column; gap: 8px; flex: 1 1 220px; }
+.search-filters input, .search-filters select { font: inherit; color: #f3f4fb; background: #1d2234; border: 1px solid #69728d; border-radius: 6px; padding: 10px; min-width: 0; width: 100%; }
+.search-filters input:focus-visible, .search-filters select:focus-visible { outline: 3px solid #b4a5ff; outline-offset: 3px; }
+button:disabled { opacity: 0.5; cursor: default; }
 .browse-page { max-width: 1120px; margin: 0 auto; padding: 48px 24px; }
 .eyebrow { color: #b4a5ff; font-size: 0.8rem; letter-spacing: 0.12em; }
 h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.15; margin: 16px 0; }
