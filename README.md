@@ -3,7 +3,7 @@
 A TV show guide built with React + Vite + TypeScript. English interface; browsing, details, favorites and comparison are planned.
 
 ## Current stage
-Browse and show details now request real TVmaze data using fetch inside useEffect. Loading, errors, retry, empty results and missing shows have visible states. Requests are cancelled on unmount. API summaries are displayed as text, and missing or broken posters have a fallback. The fictional fixtures were removed. BrowserRouter is set up in main.tsx, and App.tsx defines the routes; details use useParams. Name search, genre filtering and Vitest logic tests are now implemented. Favorites are now implemented; comparison remains to be implemented.
+Browse and show details now request real TVmaze data using fetch inside useEffect. Loading, errors, retry, empty results and missing shows have visible states. Requests are cancelled on unmount. API summaries are displayed as text, and missing or broken posters have a fallback. The fictional fixtures were removed. BrowserRouter is set up in main.tsx, and App.tsx defines the routes; details use useParams. Name search, genre filtering and Vitest logic tests are now implemented. Favorites are now implemented; comparison is now implemented.
 
 Latest verification: the real-data implementation passes build and lint. Live browser behavior is not yet verified: the in-app browser could not reach localhost, and native Chrome automation stopped because it could not confidently determine the browser URL. Earlier fixture/render checks below are historical, not evidence that the new asynchronous screens pass browser tests.
 
@@ -33,13 +33,16 @@ After the sample-list implementation, build and lint passed again. Visual render
 
 Vitest and its UI are installed. Run `npm test` for a single test run or `npm run test:ui` for the interactive runner. Ten tests pass for name search, genre filtering, combined filters, clearing search, missing/empty data, non-mutation and unique sorted genres. Build and lint also pass. The interactive UI has not yet been checked in a browser.
 
+## Comparison
+`/compare` loads the same first catalog page and allows two different selections. A table compares rating, genres, status and schedule. Change either selector to replace a show, choose its empty option to remove it, or clear both. Selections intentionally reset when leaving the page or refreshing. Twenty-two logic tests, build and lint pass after this step; browser checks remain pending.
+
 ## Favorites
 Favorites now live in App state and are passed to pages via typed props. Save/remove buttons are available on cards and details. `/favorites` displays saved shows and an empty state. Each change is serialized to `showshelf-favorites` in localStorage; startup restores validated entries and drops invalid or duplicate records. A failed storage write leaves this visit's state usable and displays a warning. Saved summaries are snapshots; opening details fetches fresh information. Favorites are local to this browser, not synced across devices or open tabs.
 
 Verification: 18 unit tests pass (10 search/filter tests and 8 favorite parsing/toggling tests), as do build and lint. End-to-end browser persistence and visual checks remain pending. Comparison is the next feature.
 
 ## Search and filtering
-Browse now has labeled name search, a genre selector, a clear-filters button and a result count. Both filters apply together to the loaded first page only. Search ignores case and surrounding spaces. A message appears when there are no matches. BrowsePage owns the two state values, passes them and change handlers to SearchFilters, and uses the pure filterShows function to calculate the visible list. This feature does not send a network request for each keystroke. Comparison remains pending.
+Browse now has labeled name search, a genre selector, a clear-filters button and a result count. Both filters apply together to the loaded first page only. Search ignores case and surrounding spaces. A message appears when there are no matches. BrowsePage owns the two state values, passes them and change handlers to SearchFilters, and uses the pure filterShows function to calculate the visible list. This feature does not send a network request for each keystroke. Comparison is now implemented.
 
 ## Routing checks
 After adding routing, build and lint passed. A temporary render check outside the repository verified the three direct detail URLs, card links, zero and missing values, invalid show IDs and unknown pages using MemoryRouter. This does not count as the required Vitest suite and does not verify browser clicks or refreshes.
