@@ -22,3 +22,7 @@ Screenshots are saved in the workspace outputs folder as showshelf-desktop.jpg a
 
 ## Limits and remaining student actions
 Real outage, quota and malformed-storage paths were covered by automated tests, not forced on the live service. No public deployment was attempted or required. Keyboard focus styles and native control semantics are present; a complete accessibility audit was not performed. The student must review, add truthful personal testing notes and practice the defense. Automatic prompt-hook activation remains unverified; the documented manual fallback was used. The early accumulated setup is one commit, followed by genuine separate feature commits.
+
+## Visual refresh — 1 November 2026
+Updated the palette, typography, navigation, hero, compact card grid and poster links using CSS only. All 32 tests, build and lint passed. Live browser verified API loading without console warnings/errors, mobile filtering and poster-to-detail navigation at 390px, without horizontal overflow. Desktop screenshot saved as showshelf-redesign.jpg in workspace outputs.
+

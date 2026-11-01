@@ -39,9 +39,14 @@ export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesPro
 
   return (
     <main className="browse-page">
-      <p className="eyebrow">YOUR NEXT WATCH STARTS HERE</p>
+      <div className="browse-hero">
+      <p className="eyebrow">THE NEXT EPISODE IS YOURS</p>
       <h1>Find your next favorite.</h1>
-      <p>Explore stories worth making time for.</p>
+      <p className="hero-description">Big stories. Unexpected discoveries.<br />Make room for something worth watching.</p>
+      <a className="hero-cta" href="#collection">Explore the collection <span aria-hidden="true">↓</span></a>
+      <span className="hero-decoration" aria-hidden="true">PLAY<br />NEXT.</span>
+      </div>
+      <div className="collection-heading" id="collection"><h2>The collection</h2><span>DISCOVER · SAVE · COMPARE</span></div>
       <p>Search and filters apply only to the loaded first page of the TVmaze catalog.</p>
       {loading && <StatusMessage message="Loading shows…" />}
       {!loading && error && <div><StatusMessage message={error} /><button onClick={() => setAttempt(attempt + 1)}>Try again</button></div>}
