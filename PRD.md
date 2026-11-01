@@ -20,7 +20,7 @@ Fetch inside useEffect, check response.ok, and clean up pending requests. Render
 - List: `https://api.tvmaze.com/shows?page=0`
 - Details: `https://api.tvmaze.com/shows/{id}`
 - Reference: https://www.tvmaze.com/api
-- Inspection results and remaining cross-origin check: [API verification](docs/api-verification.md).
+- Inspection results and successful cross-origin check: [API verification](docs/api-verification.md).
 - Initial scope: one loaded page, with a visible explanation that search and genre filters apply only to loaded shows. This is not a search of the complete TVmaze catalog.
 - Verify the exact response, null fields, browser CORS and attribution/license requirements before task 2 completes. Include a TVmaze source link in the final app.
 

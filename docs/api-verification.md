@@ -26,12 +26,12 @@ The show index is paginated with up to 250 results per page; deleted records can
 
 The documentation states that endpoints support CORS. It describes rate limiting (at least 20 calls per 10 seconds per IP, potentially stricter), so handle HTTP 429 and avoid request loops. The API data is licensed under CC BY-SA: credit TVmaze with a visible source link and follow ShareAlike for reused/adapted data. Preserve the API-provided show URL for a source link on details. Do not confuse the data license with a license for our own application code.
 
-## Not yet verified
+## Historical connection issue (resolved; see below)
 A real cross-origin fetch from the local application has NOT passed. A scratch test page was served at http://127.0.0.1:4174, but the in-app browser timed out connecting. A standalone data-URL test was rejected by browser URL security policy and was not executed. No bypass was attempted.
 
 Directly opening JSON verifies availability and response shape, not browser CORS. Task 2 therefore remains open until the student or an available local browser runs the scratch page successfully. The scratch page is outside the application in work/api-probe.html; its local server is work/serve-probe.cjs. From the workspace root run `node work/serve-probe.cjs` and open http://127.0.0.1:4174. Successful output must show listStatus and detailStatus 200 and the actual data counts; FAILED is not a pass.
 
-## Workflow status
+## Workflow status at the initial inspection
 The current message was logged through the original script as codex-manual-fallback because the repository hook did not automatically record it. Automatic logging still requires verification in an active project session. No student checks or reflection were invented, and no commit was made by the assistant.
 
 ## Resolved in final verification
