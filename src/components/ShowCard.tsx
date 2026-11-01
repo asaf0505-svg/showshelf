@@ -13,7 +13,7 @@ interface ShowCardProps {
 export default function ShowCard({ show, isFavorite, onToggleFavorite }: ShowCardProps) {
   return (
     <article className="show-card">
-      <ShowPoster src={show.image?.medium} name={show.name} />
+      <Link className="poster-link" to={`/shows/${show.id}`} aria-label={`View details for ${show.name}`}><ShowPoster src={show.image?.medium} name={show.name} /><span className="poster-action" aria-hidden="true">View series ↗</span></Link>
       <div className="card-content">
         <p className="genres">{show.genres.join(' · ') || 'Genre not available'}</p>
         <h2><Link to={`/shows/${show.id}`}>{show.name}</Link></h2>
