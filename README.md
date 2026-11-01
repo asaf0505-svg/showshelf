@@ -39,6 +39,7 @@ Search and comparison options cover the loaded first page, not the full catalog.
 Real in-app browser checks on 30 October 2026 verified live list/detail API requests, 240 loaded shows, filtering/clear/no-results, detail refresh, favorite save/refresh/remove, comparison, invalid routes and narrow-screen layout at 390px. No console errors or warnings were observed in that session. The server had to run outside the isolated execution sandbox for browsers to reach it. See [verification record](docs/verification.md) for limits and evidence.
 
 ## Project documents
+- [Open and run the project in VS Code (Hebrew)](docs/vscode-guide.md)
 - [Course requirement audit and remaining gaps](docs/course-audit.md)
 - [Requirements](PRD.md)
 - [Task sequence](tasks.md)
