@@ -44,4 +44,6 @@ One defined task at a time: agree on scope and Done when, implement, run relevan
   Deadline from the supplied assignment: 5 November 2026 at 10:00 Asia/Jerusalem. No submission or lecturer approval is claimed.
 
 ## Honest history
+Follow-up to task 10 (1 November): re-audit each course requirement, rerun test/build/lint, and correct outdated API-verification headings. Done when: docs/course-audit.md separates verified implementation from remaining process/student requirements. Completed by the assistant; student review remains pending.
+
 The initial setup, sample list and routing were published together in d4253ba; they were not separate commits. API, filters, favorites, comparison, verification and design subsequently received separate commits. See GitHub history for the actual sequence. PROMPTS.md is append-only and has not been rewritten to imply missing early planning messages were captured.
