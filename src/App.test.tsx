@@ -34,9 +34,11 @@ it('filters the loaded list, handles no matches and clears both filters', async 
   fireEvent.change(screen.getByLabelText('Genre'), { target: { value: 'Comedy' } })
   expect(screen.getByText(/No shows match/)).toBeTruthy()
   fireEvent.change(screen.getByLabelText('Status'), { target: { value: 'Ended' } })
+  fireEvent.change(screen.getByLabelText('Sort by'), { target: { value: 'rating' } })
   fireEvent.click(screen.getByRole('button', { name: 'Clear filters' }))
   expect(screen.getByRole('link', { name: 'Kitchen Club' })).toBeTruthy()
   expect((screen.getByLabelText('Status') as HTMLSelectElement).value).toBe('')
+  expect((screen.getByLabelText('Sort by') as HTMLSelectElement).value).toBe('default')
 })
 
 it('navigates to details and renders API HTML as plain text', async () => {

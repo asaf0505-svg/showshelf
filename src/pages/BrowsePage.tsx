@@ -5,6 +5,7 @@ import type { Show } from '../types/show'
 import SearchFilters from '../components/SearchFilters'
 import { filterShows, getGenres } from '../utils/filterShows'
 import type { FavoritesProps } from '../types/favorites'
+import { sortShows, type SortOption } from '../utils/sortShows'
 
 export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesProps) {
   const [shows, setShows] = useState<Show[]>([])
@@ -14,7 +15,8 @@ export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesPro
   const [query, setQuery] = useState('')
   const [genre, setGenre] = useState('')
   const [status, setStatus] = useState('')
-  const filteredShows = filterShows(shows, query, genre, status)
+  const [sortBy, setSortBy] = useState<SortOption>('default')
+  const filteredShows = sortShows(filterShows(shows, query, genre, status), sortBy)
   const genres = getGenres(shows)
 
   useEffect(() => {
@@ -54,7 +56,7 @@ export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesPro
       {!loading && !error && shows.length === 0 && <StatusMessage message="No shows available." />}
       {!loading && !error && shows.length > 0 && (
         <>
-          <SearchFilters query={query} genre={genre} status={status} genres={genres} onQueryChange={setQuery} onGenreChange={setGenre} onStatusChange={setStatus} onClear={() => { setQuery(''); setGenre(''); setStatus('') }} />
+          <SearchFilters query={query} genre={genre} status={status} sortBy={sortBy} genres={genres} onQueryChange={setQuery} onGenreChange={setGenre} onStatusChange={setStatus} onSortChange={setSortBy} onClear={() => { setQuery(''); setGenre(''); setStatus(''); setSortBy('default') }} />
           <StatusMessage message={`${filteredShows.length} of ${shows.length} shows`} />
           {filteredShows.length === 0 ? (
             <p>No shows match your filters. Try a different name or clear the filters.</p>
