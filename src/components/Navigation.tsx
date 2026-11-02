@@ -6,6 +6,8 @@ interface NavigationProps {
 
 export default function Navigation({ favoriteCount }: NavigationProps) {
   return (
+    <>
+    <a className="skip-link" href="#main-content">Skip to main content</a>
     <header className="site-header">
       <Link className="brand" to="/"><span className="brand-mark" aria-hidden="true"><span className="brand-play" /></span>ShowShelf<span className="brand-dot" aria-hidden="true">.</span></Link>
       <nav aria-label="Main navigation">
@@ -15,5 +17,6 @@ export default function Navigation({ favoriteCount }: NavigationProps) {
         <NavLink to="/compare">Compare</NavLink>
       </nav>
     </header>
+    </>
   )
 }

@@ -50,12 +50,12 @@ function ShowDetailsContent({ id, favorites, onToggleFavorite }: FavoritesProps 
     return () => controller.abort()
   }, [showId, validId, attempt])
 
-  if (loading) return <main className="browse-page"><Link to="/">Back to Browse</Link><StatusMessage message="Loading show…" /></main>
-  if (error) return <main className="browse-page"><h1>Unable to load show</h1><StatusMessage message={error} /><button onClick={() => setAttempt(attempt + 1)}>Try again</button><p><Link to="/">Back to Browse</Link></p></main>
+  if (loading) return <main className="browse-page" id="main-content" tabIndex={-1}><Link to="/">Back to Browse</Link><StatusMessage message="Loading show…" /></main>
+  if (error) return <main className="browse-page" id="main-content" tabIndex={-1}><h1>Unable to load show</h1><StatusMessage message={error} /><button onClick={() => setAttempt(attempt + 1)}>Try again</button><p><Link to="/">Back to Browse</Link></p></main>
 
   if (notFound || !show) {
     return (
-      <main className="browse-page">
+      <main className="browse-page" id="main-content" tabIndex={-1}>
         <h1>Show not found</h1>
         <p>Check the address or choose another show from Browse.</p>
         <Link to="/">Back to Browse</Link>
@@ -64,7 +64,7 @@ function ShowDetailsContent({ id, favorites, onToggleFavorite }: FavoritesProps 
   }
 
   return (
-    <main className="browse-page">
+    <main className="browse-page" id="main-content" tabIndex={-1}>
       <Link to="/">Back to Browse</Link>
       <div className="show-details">
         <ShowPoster src={show.image?.original} name={show.name} />

@@ -40,7 +40,7 @@ export default function TopTenPage({ favorites, onToggleFavorite }: FavoritesPro
   const rankedShows = getDeveloperTop(shows)
 
   return (
-    <main className="browse-page top-ten-page">
+    <main className="browse-page top-ten-page" id="main-content" tabIndex={-1}>
       {loading && <LoadingCards count={10} message="Loading Top 10…" />}
       {!loading && error && <div><StatusMessage message={error} /><button onClick={() => setAttempt(attempt + 1)}>Try again</button></div>}
       {!loading && !error && <TopTenSection rankedShows={rankedShows} favorites={favorites} onToggleFavorite={onToggleFavorite} />}

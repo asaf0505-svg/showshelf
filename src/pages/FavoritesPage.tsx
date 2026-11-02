@@ -12,7 +12,7 @@ export default function FavoritesPage({ favorites, onToggleFavorite, onClearFavo
   }
 
   return (
-    <main className="browse-page">
+    <main className="browse-page" id="main-content" tabIndex={-1}>
       <div className="favorites-heading">
         <h1>Your favorites</h1>
         {favorites.length > 0 && <button className="danger-button" type="button" onClick={confirmClear}>Clear all favorites</button>}

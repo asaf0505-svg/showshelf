@@ -66,6 +66,7 @@ it('shows available developer picks with their fixed ranks', async () => {
   expect(screen.queryByRole('list', { name: 'Developer Top 10' })).toBeNull()
   fireEvent.click(screen.getByRole('link', { name: 'Top 10' }))
   const topTen = await screen.findByRole('list', { name: 'Developer Top 10' })
+  expect(screen.getByRole('heading', { level: 1, name: 'Top 10 shows' })).toBeTruthy()
   expect(within(topTen).getByRole('link', { name: 'Shameless' })).toBeTruthy()
   expect(within(topTen).getByRole('link', { name: 'Peaky Blinders' })).toBeTruthy()
   expect(within(topTen).getByRole('link', { name: 'Prison Break' })).toBeTruthy()
@@ -75,6 +76,16 @@ it('shows available developer picks with their fixed ranks', async () => {
   expect(within(topTen).getByLabelText('Rank 5')).toBeTruthy()
   expect(within(topTen).getByLabelText('Rank 8')).toBeTruthy()
   expect(within(topTen).getByLabelText('Rank 9')).toBeTruthy()
+})
+
+it('offers a keyboard skip link to the main content', () => {
+  open('/favorites')
+  const skipLink = screen.getByRole('link', { name: 'Skip to main content' })
+  const mainContent = document.querySelector('#main-content')
+
+  expect(skipLink.getAttribute('href')).toBe('#main-content')
+  expect(mainContent?.tagName).toBe('MAIN')
+  expect(mainContent?.getAttribute('tabindex')).toBe('-1')
 })
 
 it('navigates to details and renders API HTML as plain text', async () => {

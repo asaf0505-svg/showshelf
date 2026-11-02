@@ -1,4 +1,6 @@
 .site-header { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 24px; border-bottom: 1px solid #34384b; }
+.skip-link { position: fixed; top: 12px; left: 12px; z-index: 100; padding: 10px 14px; border-radius: 6px; background: #f9d788; color: #172013; font-weight: 700; transform: translateY(-160%); }
+.skip-link:focus { transform: translateY(0); }
 .site-header a { color: #f3f4fb; text-decoration: none; }
 .brand { font-size: 1.5rem; font-weight: bold; }
 .site-header nav a { padding-bottom: 6px; }
@@ -70,7 +72,7 @@ a { color: #d5f277; }
 .hero-cta { display: inline-flex; align-items: center; gap: 30px; background: #d5f277; color: #172013; border-radius: 8px; padding: 12px 18px; margin-top: 20px; text-decoration: none; font-weight: 650; }
 .hero-decoration { position: absolute; right: -20px; top: 8px; z-index: -1; font-size: clamp(100px,16vw,210px); line-height: .9; font-weight: 900; font-style: italic; color: #d5f2770a; letter-spacing: -.07em; transform: rotate(-12deg); }
 .collection-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; scroll-margin-top: 24px; }
-.collection-heading h2 { font-size: 1.6rem; letter-spacing: -.04em; margin: 0; }
+.collection-heading h1,.collection-heading h2 { font-size: 1.6rem; letter-spacing: -.04em; margin: 0; }
 .collection-heading span { font-size: .65rem; color: #9aa89e; letter-spacing: .15em; }
 .top-ten { margin-bottom: 64px; }
 .top-ten-page .top-ten { margin-bottom: 0; }
@@ -85,7 +87,7 @@ a { color: #d5f277; }
 .skeleton-poster,.skeleton-line { animation: skeleton-pulse 1.4s ease-in-out infinite alternate; }
 @keyframes skeleton-pulse { from { opacity: .45; } to { opacity: 1; } }
 .top-ten .collection-heading { margin-bottom: 22px; }
-.top-ten .collection-heading h2 { margin-top: 5px; }
+.top-ten .collection-heading h1,.top-ten .collection-heading h2 { margin-top: 5px; }
 .top-ten-list { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 18px; margin: 0; padding: 0; list-style: none; }
 .top-ten-list li { position: relative; min-width: 0; }
 .top-ten-list .show-card { height: 100%; }

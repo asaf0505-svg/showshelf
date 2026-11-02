@@ -42,7 +42,7 @@ export default function ComparePage() {
   const labels = ['Rating', 'Genres', 'Status', 'Schedule']
 
   return (
-    <main className="browse-page">
+    <main className="browse-page" id="main-content" tabIndex={-1}>
       <h1>Compare shows</h1>
       <p>Choose two different shows from the first page of the TVmaze catalog. Change a selection to replace it, or select “Choose a show” to remove it.</p>
       {loading && <StatusMessage message="Loading comparison options…" />}

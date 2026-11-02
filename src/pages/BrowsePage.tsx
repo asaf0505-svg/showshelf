@@ -56,7 +56,7 @@ export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesPro
   }, [attempt])
 
   return (
-    <main className="browse-page">
+    <main className="browse-page" id="main-content" tabIndex={-1}>
       <div className="browse-hero">
       <p className="eyebrow">THE NEXT EPISODE IS YOURS</p>
       <h1>Find your next favorite.</h1>

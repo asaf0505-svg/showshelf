@@ -12,7 +12,7 @@ export default function TopTenSection({ rankedShows, favorites, onToggleFavorite
       <div className="collection-heading">
         <div>
           <p className="eyebrow">DEVELOPER'S PICKS</p>
-          <h2 id="top-ten-heading">Top 10 shows</h2>
+          <h1 id="top-ten-heading">Top 10 shows</h1>
         </div>
         <span>PERSONAL RANKING</span>
       </div>
