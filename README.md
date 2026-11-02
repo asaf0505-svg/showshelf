@@ -1,6 +1,6 @@
 # ShowShelf
 
-A front-end TV guide built with React, Vite, TypeScript and React Router. Browse live TVmaze shows, search/filter the loaded catalog, save favorites and compare two shows. English interface, original responsive CSS, no backend or API key.
+A front-end TV guide built with React, Vite, TypeScript and React Router. Browse live TVmaze shows, search/filter the loaded catalog, view a personal Top 10, save favorites and compare two shows. English interface, original responsive CSS, no backend or API key.
 
 ## Run
 Use a current Node.js LTS version with npm.
@@ -14,13 +14,14 @@ npm run build
 npm run lint
 ```
 
-Open the URL printed by Vite. On the development machine the verified running server is http://127.0.0.1:5174/. It is local, not a public deployment; it stops when the server process stops. If npm is unavailable in this particular workspace, use `node ../../work/npm-runtime/package/bin/npm-cli.js` in place of `npm`. Other computers should use a normal Node/npm installation.
+Open the local URL printed by Vite. The port can change when another server is already using the default. It is local, not a public deployment; it stops when the server process stops. If npm is unavailable in this particular workspace, use `node ../../work/npm-runtime/package/bin/npm-cli.js` in place of `npm`. Other computers should use a normal Node/npm installation.
 
 ## Pages
 | Route | Purpose |
 | --- | --- |
 | `/` | Browse the first API page; name search and genre filter work together |
 | `/shows/:id` | Directly addressable details, source link and favorite toggle |
+| `/top-ten` | The developer's personal ranking of ten shows from the API catalog |
 | `/favorites` | Saved shows with remove controls and an empty state |
 | `/compare` | Two distinct selections, facts table, replacement/removal and clear action |
 
@@ -34,9 +35,9 @@ Favorites are stored only in this browser's localStorage, under `showshelf-favor
 Search and comparison options cover the loaded first page, not the full catalog. At verification it contained 240 shows. Requests run inside useEffect with cancellation and loading/error/retry handling. Summaries are converted to plain text; missing or broken posters have a fallback. Data is credited to TVmaze in the UI and is subject to its CC BY-SA terms. No API key, login, proxy or server is used.
 
 ## Verification
-32 Vitest tests pass: 22 logic tests and 10 component interaction tests. Component tests use jsdom and mocked API responses. Production build and lint pass. `test:ui` starts the Vitest UI successfully; all 32 tests also passed on that invocation.
+49 Vitest tests across 8 files pass. They cover application interactions, filtering, sorting, favorites, API processing, loading states and the Top 10 ranking. Component tests use jsdom and mocked API responses. Production build and lint pass, and the source contains no `any` usage. `test:ui` is configured; the final verification used the normal headless `npm test` command.
 
-Real in-app browser checks on 30 October 2026 verified live list/detail API requests, 240 loaded shows, filtering/clear/no-results, detail refresh, favorite save/refresh/remove, comparison, invalid routes and narrow-screen layout at 390px. No console errors or warnings were observed in that session. The server had to run outside the isolated execution sandbox for browsers to reach it. See [verification record](docs/verification.md) for limits and evidence.
+Final in-app browser checks on 2 November 2026 verified 240 live catalog cards, 10 ranked Top 10 cards, the empty Favorites state, two comparison selectors with API options, a two-show comparison table, direct detail refresh, invalid IDs and unknown routes. No console errors or warnings were observed. All five application routes were also checked at a 390px mobile viewport without page-level horizontal overflow. See [verification record](docs/verification.md) for limits and earlier evidence.
 
 ## Project documents
 - [Short commit labels for the presentation](docs/commit-guide.md)

@@ -37,7 +37,7 @@ One defined task at a time: agree on scope and Done when, implement, run relevan
 
 ## Remaining tasks
 - [ ] 11. Student review and defense practice
-  Done when: the student tests the four pages, adds their own truthful reflection and can explain state, props, effects, routing, data flow and a test without agent help.
+  Done when: the student tests all application pages, adds their own truthful reflection and can explain state, props, effects, routing, data flow and a test without agent help.
   Start with docs/defense-guide.md. Only the student can confirm understanding.
 - [ ] 12. Submission and process review
   Done when: automatic prompt logging is verified for future sessions (or the lecturer accepts the disclosed fallback), historical logging limitations are reviewed with the lecturer, the student checks public repository access in an incognito window, selects a defense slot and submits the URL.
@@ -47,5 +47,7 @@ One defined task at a time: agree on scope and Done when, implement, run relevan
 Follow-up to task 10: provide a portable VS Code workspace file and a Hebrew opening/running guide. Done when: workspace JSON resolves to the repository and the guide distinguishes normal npm setup from this machine's local npm fallback. Completed; opening it by the student is not claimed.
 
 Follow-up to task 10 (1 November): re-audit each course requirement, rerun test/build/lint, and correct outdated API-verification headings. Done when: docs/course-audit.md separates verified implementation from remaining process/student requirements. Completed by the assistant; student review remains pending.
+
+Follow-up to task 10 (2 November): run the final 49-test, build and lint checks; verify every route, direct detail refresh, invalid routes, comparison and console output in the browser; update documentation with the observed results. Completed by the assistant; submission and student understanding are not claimed.
 
 The initial setup, sample list and routing were published together in c904cc4; they were not separate commits. API, filters, favorites, comparison, verification and design subsequently received separate commits. See GitHub history for the actual sequence. Commit messages were shortened on 2 November at the user's request; the contents and order were preserved, and the previous history remains on the backup branch `history-before-short-names-2026-11-02`. PROMPTS.md is append-only and has not been rewritten to imply missing early planning messages were captured.

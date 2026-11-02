@@ -36,3 +36,25 @@ During a guided localhost session, the student reported completing these checks 
 
 This records only the actions the student reported as working. It does not claim independent understanding of the implementation, a full accessibility audit, automatic prompt-hook activation or submission readiness.
 
+## Final verification — 2 November 2026
+
+Automated checks on the final source:
+
+- `npm test`: 49 tests passed across 8 files.
+- `npm run build`: TypeScript and the Vite production build passed.
+- `npm run lint`: passed.
+- A source search found no `any` usage in TypeScript files.
+
+Fresh in-app browser checks at `http://localhost:5173/` verified:
+
+- Browse rendered 240 cards from the live TVmaze response.
+- Top 10 rendered exactly 10 ranked cards.
+- Favorites rendered its truthful empty state in the clean verification tab.
+- Compare exposed two selectors with 241 options each, then rendered Under the Dome and Person of Interest together in the comparison table.
+- `/shows/269` loaded Peaky Blinders and loaded again after a direct refresh.
+- `/shows/abc` rendered Show not found; `/unknown` rendered Page not found.
+- Browser logs contained no warning or error entries during these checks.
+- Browse, Top 10, Favorites, Compare and show details were measured at a 390px viewport. There was no page-level horizontal overflow; the mobile navigation uses a consistent two-by-two grid. The viewport override was restored afterward.
+
+The final browser pass did not repeat every earlier destructive or persistence interaction. Favorite add/remove persistence, empty search results, retry behavior and malformed storage remain covered by automated tests and the earlier recorded live checks. No public deployment, anonymous GitHub access check or submission was performed.
+
