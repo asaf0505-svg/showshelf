@@ -26,3 +26,13 @@ Real outage, quota and malformed-storage paths were covered by automated tests, 
 ## Visual refresh — 1 November 2026
 Updated the palette, typography, navigation, hero, compact card grid and poster links using CSS only. All 32 tests, build and lint passed. Live browser verified API loading without console warnings/errors, mobile filtering and poster-to-detail navigation at 390px, without horizontal overflow. Desktop screenshot saved as showshelf-redesign.jpg in workspace outputs.
 
+## Student-guided check — 2 November 2026
+During a guided localhost session, the student reported completing these checks personally:
+
+- Browse: searched for Under the Dome, applied the Drama genre, cleared the filters and opened the show.
+- Details: reached the individual show page and confirmed that it loaded.
+- Favorites: saved the show, found it on Favorites, refreshed and confirmed persistence, then removed it.
+- Compare: opened the comparison page and inspected the comparison fields, including Schedule.
+
+This records only the actions the student reported as working. It does not claim independent understanding of the implementation, a full accessibility audit, automatic prompt-hook activation or submission readiness.
+
