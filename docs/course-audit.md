@@ -16,9 +16,9 @@ Checked by the assistant against the assignment screenshots and the student's Sh
 | Loading/error/data | Conditional rendering and retry in all fetching pages; empty and invalid-ID states present. |
 | Search or filter | Both: case-insensitive name search plus genre. Scope explicitly limited to page 0. |
 | Favorites | Browser localStorage, validated restoration, add/remove and save-failure notice. |
-| Compare | Two distinct selections, replacement, individual removal and clear. |
+| Compare | Free-text option filtering, two distinct selections, replacement, individual removal and clear. |
 | Missing information | Null ratings, summaries and images handled; failed images show placeholder. |
-| Unit tests | 49 tests across 8 files cover application interactions and project logic; all passed on 2 November. |
+| Unit tests | 50 tests across 8 files cover application interactions and project logic; all passed on 2 November. |
 | Test scripts | npm test and npm run test:ui configured. UI startup previously checked; visual UI inspection remains unperformed. |
 | Build and code checks | Build and lint passed again today. |
 | Responsive original CSS | App.css and index.css. All five routes were measured at 390px without page-level horizontal overflow; mobile navigation was polished into a two-by-two grid. Full accessibility and all-device testing are not claimed. |

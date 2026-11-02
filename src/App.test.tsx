@@ -181,6 +181,20 @@ it('compares two distinct shows and clears selections', async () => {
   expect(screen.queryByRole('table')).toBeNull()
 })
 
+it('filters comparison options with free search', async () => {
+  open('/compare')
+  const search = await screen.findByLabelText('Search shows')
+  const firstSelect = screen.getByLabelText('First show')
+  fireEvent.change(search, { target: { value: 'kitchen' } })
+  expect(within(firstSelect).getByRole('option', { name: 'Kitchen Club' })).toBeTruthy()
+  expect(within(firstSelect).queryByRole('option', { name: 'Night Watch' })).toBeNull()
+
+  fireEvent.change(firstSelect, { target: { value: '2' } })
+  fireEvent.change(search, { target: { value: 'night' } })
+  expect(within(firstSelect).getByRole('option', { name: 'Kitchen Club' })).toBeTruthy()
+  expect(within(firstSelect).getByRole('option', { name: 'Night Watch' })).toBeTruthy()
+})
+
 it('does not update an unmounted Browse page after navigation', async () => {
   let finish: ((value: Response) => void) | undefined
   fetchMock.mockImplementationOnce(() => new Promise(resolve => { finish = resolve }))

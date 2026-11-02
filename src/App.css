@@ -96,6 +96,8 @@ a { color: #d5f277; }
 .search-filters { background: #19211c; border: 1px solid #ffffff12; border-radius: 12px; padding: 18px; }
 .search-filters label { color: #c2cec5; font-size: .8rem; font-weight: 600; }
 .search-filters input,.search-filters select { background: #101813; border-color: #405044; color: #f6f4eb; min-height: 44px; }
+.search-filters .compare-search,.compare-search-result { flex-basis: 100%; }
+.compare-search-result { margin: -6px 0 0; color: #f9d788; font-size: .85rem; }
 button { background: #f2b84b; color: #172013; min-height: 44px; font-weight: 600; }
 button:hover:not(:disabled) { background: #ffd06e; }
 .hero-cta:hover { background: #e3ffa0; }
