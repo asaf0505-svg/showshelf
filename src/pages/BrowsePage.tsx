@@ -13,7 +13,8 @@ export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesPro
   const [attempt, setAttempt] = useState(0)
   const [query, setQuery] = useState('')
   const [genre, setGenre] = useState('')
-  const filteredShows = filterShows(shows, query, genre)
+  const [status, setStatus] = useState('')
+  const filteredShows = filterShows(shows, query, genre, status)
   const genres = getGenres(shows)
 
   useEffect(() => {
@@ -53,7 +54,7 @@ export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesPro
       {!loading && !error && shows.length === 0 && <StatusMessage message="No shows available." />}
       {!loading && !error && shows.length > 0 && (
         <>
-          <SearchFilters query={query} genre={genre} genres={genres} onQueryChange={setQuery} onGenreChange={setGenre} onClear={() => { setQuery(''); setGenre('') }} />
+          <SearchFilters query={query} genre={genre} status={status} genres={genres} onQueryChange={setQuery} onGenreChange={setGenre} onStatusChange={setStatus} onClear={() => { setQuery(''); setGenre(''); setStatus('') }} />
           <StatusMessage message={`${filteredShows.length} of ${shows.length} shows`} />
           {filteredShows.length === 0 ? (
             <p>No shows match your filters. Try a different name or clear the filters.</p>

@@ -4,7 +4,7 @@ import { filterShows, getGenres } from './filterShows'
 
 // Test data only; the app gets its data from TVmaze.
 const base: Show = { id: 1, name: 'Night Watch', genres: ['Drama', 'Mystery'], rating: { average: null }, image: null, summary: null, status: 'Ended', schedule: { days: [], time: '' }, url: '' }
-const shows: Show[] = [base, { ...base, id: 2, name: 'Kitchen Club', genres: ['Comedy'] }, { ...base, id: 3, name: 'Night Shift', genres: ['Drama'] }]
+const shows: Show[] = [base, { ...base, id: 2, name: 'Kitchen Club', genres: ['Comedy'], status: 'Running' }, { ...base, id: 3, name: 'Night Shift', genres: ['Drama'] }]
 
 describe('filterShows', () => {
   it('returns all shows when no filters are selected', () => {
@@ -15,6 +15,14 @@ describe('filterShows', () => {
   })
   it('filters by an exact genre', () => {
     expect(filterShows(shows, '', 'Comedy').map(s => s.id)).toEqual([2])
+  })
+  it('filters by show status', () => {
+    expect(filterShows(shows, '', '', 'Running').map(s => s.id)).toEqual([2])
+    expect(filterShows(shows, '', '', 'Ended').map(s => s.id)).toEqual([1, 3])
+  })
+  it('combines name, genre and status filters', () => {
+    expect(filterShows(shows, 'kitchen', 'Comedy', 'Running').map(s => s.id)).toEqual([2])
+    expect(filterShows(shows, 'night', 'Drama', 'Running')).toEqual([])
   })
   it('requires both the name and genre to match', () => {
     expect(filterShows(shows, 'night', 'Mystery').map(s => s.id)).toEqual([1])

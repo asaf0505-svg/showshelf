@@ -1,10 +1,11 @@
 import type { Show } from '../types/show'
 
-export function filterShows(shows: Show[], query: string, genre: string): Show[] {
+export function filterShows(shows: Show[], query: string, genre: string, status = ''): Show[] {
   const search = query.trim().toLowerCase()
   return shows.filter((show) =>
     show.name.toLowerCase().includes(search) &&
-    (genre === '' || show.genres.includes(genre)),
+    (genre === '' || show.genres.includes(genre)) &&
+    (status === '' || show.status === status),
   )
 }
 

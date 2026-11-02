@@ -33,8 +33,10 @@ it('filters the loaded list, handles no matches and clears both filters', async 
   expect(screen.queryByRole('link', { name: 'Kitchen Club' })).toBeNull()
   fireEvent.change(screen.getByLabelText('Genre'), { target: { value: 'Comedy' } })
   expect(screen.getByText(/No shows match/)).toBeTruthy()
+  fireEvent.change(screen.getByLabelText('Status'), { target: { value: 'Ended' } })
   fireEvent.click(screen.getByRole('button', { name: 'Clear filters' }))
   expect(screen.getByRole('link', { name: 'Kitchen Club' })).toBeTruthy()
+  expect((screen.getByLabelText('Status') as HTMLSelectElement).value).toBe('')
 })
 
 it('navigates to details and renders API HTML as plain text', async () => {
