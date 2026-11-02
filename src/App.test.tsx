@@ -8,6 +8,10 @@ import { FAVORITES_KEY } from './utils/favorites'
 
 const first: Show = { id: 1, name: 'Night Watch', genres: ['Drama'], rating: { average: 8 }, image: null, summary: '<p>A <b>mystery</b> &amp; a story.</p>', status: 'Running', schedule: { days: ['Monday'], time: '20:00' }, url: 'https://www.tvmaze.com/shows/1' }
 const second: Show = { ...first, id: 2, name: 'Kitchen Club', genres: ['Comedy'], rating: { average: null }, summary: null }
+const lowRatedOne: Show = { ...first, id: 3, name: 'Low Rated One', rating: { average: 4 } }
+const lowRatedTwo: Show = { ...first, id: 4, name: 'Low Rated Two', rating: { average: 5 } }
+const peakyBlinders: Show = { ...first, id: 269, name: 'Peaky Blinders', rating: { average: 8.5 } }
+const prisonBreak: Show = { ...first, id: 541, name: 'Prison Break', rating: { average: 8.2 } }
 const fetchMock = vi.fn<typeof fetch>()
 const response = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status })
 const open = (path = '/') => render(<MemoryRouter initialEntries={[path]}><App /></MemoryRouter>)
@@ -17,7 +21,9 @@ beforeEach(() => {
   fetchMock.mockReset()
   fetchMock.mockImplementation(async (input) => {
     const url = String(input)
-    if (url.endsWith('page=0')) return response([first, second])
+    if (url.endsWith('page=0')) return response([first, second, lowRatedOne, lowRatedTwo])
+    if (url.endsWith('/269')) return response(peakyBlinders)
+    if (url.endsWith('/541')) return response(prisonBreak)
     if (url.endsWith('/1')) return response(first)
     if (url.endsWith('/2')) return response(second)
     return response({}, 404)

@@ -6,6 +6,12 @@ import SearchFilters from '../components/SearchFilters'
 import { filterShows, getGenres } from '../utils/filterShows'
 import type { FavoritesProps } from '../types/favorites'
 import { sortShows, type SortOption } from '../utils/sortShows'
+import { mergeCatalogShows } from '../utils/mergeCatalogShows'
+
+const catalogPickUrls = [
+  'https://api.tvmaze.com/shows/269',
+  'https://api.tvmaze.com/shows/541',
+]
 
 export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesProps) {
   const [shows, setShows] = useState<Show[]>([])
@@ -29,7 +35,15 @@ export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesPro
         if (!response.ok) throw new Error(response.status === 429 ? 'Too many requests. Please wait a moment and try again.' : 'Could not load shows. Please try again.')
         const data: Show[] = await response.json()
         if (!Array.isArray(data)) throw new Error('Unexpected response from TVmaze.')
-        if (!controller.signal.aborted) setShows(data)
+        if (data.length === 0) {
+          if (!controller.signal.aborted) setShows([])
+          return
+        }
+
+        const pickResponses = await Promise.all(catalogPickUrls.map(url => fetch(url, { signal: controller.signal })))
+        if (pickResponses.some(pickResponse => !pickResponse.ok)) throw new Error('Could not load the selected shows. Please try again.')
+        const picks: Show[] = await Promise.all(pickResponses.map(pickResponse => pickResponse.json()))
+        if (!controller.signal.aborted) setShows(mergeCatalogShows(data, picks))
       } catch (error) {
         if (!controller.signal.aborted) setError(error instanceof Error ? error.message : 'Could not load shows.')
       } finally {
