@@ -68,9 +68,7 @@ a { color: #d5f277; }
 .browse-hero { position: relative; isolation: isolate; overflow: hidden; padding: 48px 40px; border: 1px solid #ffffff12; border-radius: 20px; background: linear-gradient(120deg,#263d30,#17251e 70%); margin-bottom: 48px; }
 .browse-hero h1 { max-width: 620px; font-size: clamp(2.8rem,6vw,5rem); line-height: 1.02; letter-spacing: -.055em; margin: 22px 0; }
 .eyebrow { color: #d5f277; font-size: .7rem; font-weight: 700; letter-spacing: .2em; }
-.hero-description { color: #c1cec5; line-height: 1.7; }
 .hero-cta { display: inline-flex; align-items: center; gap: 30px; background: #d5f277; color: #172013; border-radius: 8px; padding: 12px 18px; margin-top: 20px; text-decoration: none; font-weight: 650; }
-.hero-decoration { position: absolute; right: -20px; top: 8px; z-index: -1; font-size: clamp(100px,16vw,210px); line-height: .9; font-weight: 900; font-style: italic; color: #d5f2770a; letter-spacing: -.07em; transform: rotate(-12deg); }
 .collection-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; scroll-margin-top: 24px; }
 .collection-heading h1,.collection-heading h2 { font-size: 1.6rem; letter-spacing: -.04em; margin: 0; }
 .collection-heading span { font-size: .65rem; color: #9aa89e; letter-spacing: .15em; }
