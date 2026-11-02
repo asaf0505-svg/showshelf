@@ -73,6 +73,7 @@ a { color: #d5f277; }
 .collection-heading h2 { font-size: 1.6rem; letter-spacing: -.04em; margin: 0; }
 .collection-heading span { font-size: .65rem; color: #9aa89e; letter-spacing: .15em; }
 .top-ten { margin-bottom: 64px; }
+.top-ten-page .top-ten { margin-bottom: 0; }
 .top-ten .collection-heading { margin-bottom: 22px; }
 .top-ten .collection-heading h2 { margin-top: 5px; }
 .top-ten-list { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 18px; margin: 0; padding: 0; list-style: none; }

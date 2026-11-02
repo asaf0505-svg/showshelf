@@ -7,8 +7,6 @@ import { filterShows, getGenres } from '../utils/filterShows'
 import type { FavoritesProps } from '../types/favorites'
 import { sortShows, type SortOption } from '../utils/sortShows'
 import { mergeCatalogShows } from '../utils/mergeCatalogShows'
-import { getDeveloperTop } from '../utils/developerTop'
-import TopTenSection from '../components/TopTenSection'
 
 const catalogPickUrls = [
   'https://api.tvmaze.com/shows/269',
@@ -26,7 +24,6 @@ export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesPro
   const [sortBy, setSortBy] = useState<SortOption>('default')
   const filteredShows = sortShows(filterShows(shows, query, genre, status), sortBy)
   const genres = getGenres(shows)
-  const developerTop = getDeveloperTop(shows)
 
   useEffect(() => {
     const controller = new AbortController()
@@ -66,7 +63,6 @@ export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesPro
       <a className="hero-cta" href="#collection">Explore the collection <span aria-hidden="true">↓</span></a>
       <span className="hero-decoration" aria-hidden="true">PLAY<br />NEXT.</span>
       </div>
-      {!loading && !error && developerTop.length > 0 && <TopTenSection rankedShows={developerTop} favorites={favorites} onToggleFavorite={onToggleFavorite} />}
       <div className="collection-heading" id="collection"><h2>The collection</h2><span>DISCOVER · SAVE · COMPARE</span></div>
       <p>Search and filters apply only to the loaded first page of the TVmaze catalog.</p>
       {loading && <StatusMessage message="Loading shows…" />}

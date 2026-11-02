@@ -12,6 +12,18 @@ const lowRatedOne: Show = { ...first, id: 3, name: 'Low Rated One', rating: { av
 const lowRatedTwo: Show = { ...first, id: 4, name: 'Low Rated Two', rating: { average: 5 } }
 const peakyBlinders: Show = { ...first, id: 269, name: 'Peaky Blinders', rating: { average: 8.5 } }
 const prisonBreak: Show = { ...first, id: 541, name: 'Prison Break', rating: { average: 8.2 } }
+const developerShows: Record<number, string> = {
+  150: 'Shameless',
+  169: 'Breaking Bad',
+  82: 'Game of Thrones',
+  269: 'Peaky Blinders',
+  541: 'Prison Break',
+  40: 'Death Note',
+  29: 'Vikings',
+  123: 'Lost',
+  76: 'Sons of Anarchy',
+  4: 'Arrow',
+}
 const fetchMock = vi.fn<typeof fetch>()
 const response = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status })
 const open = (path = '/') => render(<MemoryRouter initialEntries={[path]}><App /></MemoryRouter>)
@@ -24,6 +36,8 @@ beforeEach(() => {
     if (url.endsWith('page=0')) return response([first, second, lowRatedOne, lowRatedTwo])
     if (url.endsWith('/269')) return response(peakyBlinders)
     if (url.endsWith('/541')) return response(prisonBreak)
+    const showId = Number(url.split('/').at(-1))
+    if (developerShows[showId]) return response({ ...first, id: showId, name: developerShows[showId] })
     if (url.endsWith('/1')) return response(first)
     if (url.endsWith('/2')) return response(second)
     return response({}, 404)
@@ -49,11 +63,18 @@ it('filters the loaded list, handles no matches and clears both filters', async 
 
 it('shows available developer picks with their fixed ranks', async () => {
   open()
+  expect(screen.queryByRole('list', { name: 'Developer Top 10' })).toBeNull()
+  fireEvent.click(screen.getByRole('link', { name: 'Top 10' }))
   const topTen = await screen.findByRole('list', { name: 'Developer Top 10' })
+  expect(within(topTen).getByRole('link', { name: 'Shameless' })).toBeTruthy()
   expect(within(topTen).getByRole('link', { name: 'Peaky Blinders' })).toBeTruthy()
   expect(within(topTen).getByRole('link', { name: 'Prison Break' })).toBeTruthy()
+  expect(within(topTen).getByRole('link', { name: 'Lost' })).toBeTruthy()
+  expect(within(topTen).getByRole('link', { name: 'Sons of Anarchy' })).toBeTruthy()
   expect(within(topTen).getByLabelText('Rank 4')).toBeTruthy()
   expect(within(topTen).getByLabelText('Rank 5')).toBeTruthy()
+  expect(within(topTen).getByLabelText('Rank 8')).toBeTruthy()
+  expect(within(topTen).getByLabelText('Rank 9')).toBeTruthy()
 })
 
 it('navigates to details and renders API HTML as plain text', async () => {
