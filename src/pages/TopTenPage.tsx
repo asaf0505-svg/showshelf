@@ -4,6 +4,7 @@ import TopTenSection from '../components/TopTenSection'
 import type { FavoritesProps } from '../types/favorites'
 import type { Show } from '../types/show'
 import { developerTopIds, getDeveloperTop } from '../utils/developerTop'
+import LoadingCards from '../components/LoadingCards'
 
 export default function TopTenPage({ favorites, onToggleFavorite }: FavoritesProps) {
   const [shows, setShows] = useState<Show[]>([])
@@ -40,7 +41,7 @@ export default function TopTenPage({ favorites, onToggleFavorite }: FavoritesPro
 
   return (
     <main className="browse-page top-ten-page">
-      {loading && <StatusMessage message="Loading Top 10…" />}
+      {loading && <LoadingCards count={10} message="Loading Top 10…" />}
       {!loading && error && <div><StatusMessage message={error} /><button onClick={() => setAttempt(attempt + 1)}>Try again</button></div>}
       {!loading && !error && <TopTenSection rankedShows={rankedShows} favorites={favorites} onToggleFavorite={onToggleFavorite} />}
       <p className="source-credit">Show data from <a href="https://www.tvmaze.com/">TVmaze</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a></p>

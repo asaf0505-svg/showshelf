@@ -7,6 +7,7 @@ import { filterShows, getGenres } from '../utils/filterShows'
 import type { FavoritesProps } from '../types/favorites'
 import { sortShows, type SortOption } from '../utils/sortShows'
 import { mergeCatalogShows } from '../utils/mergeCatalogShows'
+import LoadingCards from '../components/LoadingCards'
 
 const catalogPickUrls = [
   'https://api.tvmaze.com/shows/269',
@@ -65,7 +66,7 @@ export default function BrowsePage({ favorites, onToggleFavorite }: FavoritesPro
       </div>
       <div className="collection-heading" id="collection"><h2>The collection</h2><span>DISCOVER · SAVE · COMPARE</span></div>
       <p>Search and filters apply only to the loaded first page of the TVmaze catalog.</p>
-      {loading && <StatusMessage message="Loading shows…" />}
+      {loading && <LoadingCards count={8} message="Loading shows…" />}
       {!loading && error && <div><StatusMessage message={error} /><button onClick={() => setAttempt(attempt + 1)}>Try again</button></div>}
       {!loading && !error && shows.length === 0 && <StatusMessage message="No shows available." />}
       {!loading && !error && shows.length > 0 && (

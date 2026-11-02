@@ -74,6 +74,16 @@ a { color: #d5f277; }
 .collection-heading span { font-size: .65rem; color: #9aa89e; letter-spacing: .15em; }
 .top-ten { margin-bottom: 64px; }
 .top-ten-page .top-ten { margin-bottom: 0; }
+.skeleton-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 24px; }
+.skeleton-card { overflow: hidden; border: 1px solid #ffffff10; border-radius: 12px; background: #18201b; }
+.skeleton-poster { aspect-ratio: 2 / 3; background: #26342b; }
+.skeleton-content { display: grid; gap: 12px; padding: 17px; }
+.skeleton-line { height: 12px; border-radius: 999px; background: #34443a; }
+.skeleton-line-short { width: 46%; height: 9px; }
+.skeleton-line-title { width: 72%; height: 18px; }
+.skeleton-line-button { height: 40px; margin-top: 8px; border-radius: 6px; }
+.skeleton-poster,.skeleton-line { animation: skeleton-pulse 1.4s ease-in-out infinite alternate; }
+@keyframes skeleton-pulse { from { opacity: .45; } to { opacity: 1; } }
 .top-ten .collection-heading { margin-bottom: 22px; }
 .top-ten .collection-heading h2 { margin-top: 5px; }
 .top-ten-list { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 18px; margin: 0; padding: 0; list-style: none; }
@@ -117,6 +127,8 @@ button:hover:not(:disabled),.hero-cta:hover { background: #e3ffa0; }
 @media (min-width: 1400px) { .show-grid { grid-template-columns: repeat(5,minmax(0,1fr)); } }
 @media (max-width: 1050px) { .show-grid { grid-template-columns: repeat(3,minmax(0,1fr)); } }
 @media (max-width: 1050px) { .top-ten-list { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+@media (max-width: 1050px) { .skeleton-grid { grid-template-columns: repeat(3,minmax(0,1fr)); } }
 @media (max-width: 700px) { .show-grid,.top-ten-list { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; } .browse-hero { padding: 32px 24px; } .collection-heading span { display: none; } .show-details { gap: 24px; } }
+@media (max-width: 700px) { .skeleton-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; } }
 @media (max-width: 420px) { .site-header { padding: 20px 5%; } .site-header nav { gap: 4px; width: 100%; justify-content: space-between; } .site-header nav a { padding: 8px 12px; } .browse-page { padding: 24px 4%; } .browse-hero { padding: 28px 20px; margin-bottom: 32px; } .browse-hero h1 { font-size: 2.6rem; } .card-content { padding: 12px; } .card-summary { display: none; } .card-content button { margin-top: 14px; padding: 8px; font-size: .72rem; } .card-content h2 { font-size: .95rem; } .search-filters { padding: 14px; } }
-@media (prefers-reduced-motion: reduce) { .show-card { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .show-card { transition: none; } .skeleton-poster,.skeleton-line { animation: none; } }
