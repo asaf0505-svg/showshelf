@@ -28,6 +28,16 @@ function App() {
     }
   }
 
+  function handleClearFavorites() {
+    setFavorites([])
+    try {
+      localStorage.setItem(FAVORITES_KEY, '[]')
+      setStorageError('')
+    } catch {
+      setStorageError('Favorites were cleared for this visit, but the change could not be saved. They may return after refresh.')
+    }
+  }
+
   return (
     <>
       <Navigation favoriteCount={favorites.length} />
@@ -35,7 +45,7 @@ function App() {
       <Routes>
         <Route path="/" element={<BrowsePage favorites={favorites} onToggleFavorite={handleToggleFavorite} />} />
         <Route path="/shows/:id" element={<ShowDetailsPage favorites={favorites} onToggleFavorite={handleToggleFavorite} />} />
-        <Route path="/favorites" element={<FavoritesPage favorites={favorites} onToggleFavorite={handleToggleFavorite} />} />
+        <Route path="/favorites" element={<FavoritesPage favorites={favorites} onToggleFavorite={handleToggleFavorite} onClearFavorites={handleClearFavorites} />} />
         <Route path="/compare" element={<ComparePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

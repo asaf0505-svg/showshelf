@@ -2,10 +2,21 @@ import { Link } from 'react-router'
 import ShowCard from '../components/ShowCard'
 import type { FavoritesProps } from '../types/favorites'
 
-export default function FavoritesPage({ favorites, onToggleFavorite }: FavoritesProps) {
+interface FavoritesPageProps extends FavoritesProps {
+  onClearFavorites: () => void
+}
+
+export default function FavoritesPage({ favorites, onToggleFavorite, onClearFavorites }: FavoritesPageProps) {
+  function confirmClear() {
+    if (window.confirm('Remove all shows from your favorites?')) onClearFavorites()
+  }
+
   return (
     <main className="browse-page">
-      <h1>Your favorites</h1>
+      <div className="favorites-heading">
+        <h1>Your favorites</h1>
+        {favorites.length > 0 && <button className="danger-button" type="button" onClick={confirmClear}>Clear all favorites</button>}
+      </div>
       <p>Saved on this browser. Open a show for its latest details.</p>
       {favorites.length === 0 ? <p>No favorites yet. <Link to="/">Browse shows to find your next watch.</Link></p> : (
         <section className="show-grid" aria-label="Favorite shows">

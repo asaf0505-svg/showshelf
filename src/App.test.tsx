@@ -64,6 +64,20 @@ it('persists favorites across an app remount and removes them', async () => {
   expect(localStorage.getItem(FAVORITES_KEY)).toBe('[]')
 })
 
+it('asks before clearing all favorites', () => {
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify([first, second]))
+  const confirm = vi.spyOn(window, 'confirm').mockReturnValueOnce(false).mockReturnValueOnce(true)
+  open('/favorites')
+  const clearButton = screen.getByRole('button', { name: 'Clear all favorites' })
+  fireEvent.click(clearButton)
+  expect(screen.getByRole('link', { name: 'Night Watch' })).toBeTruthy()
+  fireEvent.click(clearButton)
+  expect(confirm).toHaveBeenCalledTimes(2)
+  expect(screen.getByText(/No favorites yet/)).toBeTruthy()
+  expect(localStorage.getItem(FAVORITES_KEY)).toBe('[]')
+  expect(within(screen.getByRole('link', { name: 'Favorites' })).getByText('0')).toBeTruthy()
+})
+
 it('keeps the visit usable when saving to storage fails', async () => {
   open()
   const save = await screen.findByRole('button', { name: 'Save Night Watch to favorites' })
