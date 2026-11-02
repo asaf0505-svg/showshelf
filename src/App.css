@@ -92,6 +92,9 @@ a { color: #d5f277; }
 .top-ten-list li { position: relative; min-width: 0; }
 .top-ten-list .show-card { height: 100%; }
 .rank-badge { position: absolute; top: 10px; left: 10px; z-index: 2; display: grid; place-items: center; min-width: 42px; height: 42px; padding: 0 8px; border-radius: 999px; background: #d5f277; color: #172013; box-shadow: 0 4px 18px #0008; font-weight: 900; }
+.rank-gold { background: #f2c94c; box-shadow: 0 4px 20px #f2c94c66; }
+.rank-silver { background: #c9d0d6; box-shadow: 0 4px 20px #c9d0d655; }
+.rank-bronze { background: #c9824b; box-shadow: 0 4px 20px #c9824b55; }
 .search-filters { background: #19211c; border: 1px solid #ffffff12; border-radius: 12px; padding: 18px; }
 .search-filters label { color: #c2cec5; font-size: .8rem; font-weight: 600; }
 .search-filters input,.search-filters select { background: #101813; border-color: #405044; color: #f6f4eb; min-height: 44px; }
