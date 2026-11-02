@@ -167,32 +167,28 @@ it('loads a detail URL directly', async () => {
 
 it('compares two distinct shows and clears selections', async () => {
   open('/compare')
-  const firstSelect = await screen.findByLabelText('First show')
-  const secondSelect = screen.getByLabelText('Second show')
-  fireEvent.change(firstSelect, { target: { value: '1' } })
-  expect((within(secondSelect).getByRole('option', { name: 'Night Watch' }) as HTMLOptionElement).disabled).toBe(true)
-  fireEvent.change(secondSelect, { target: { value: '2' } })
+  const firstSearch = await screen.findByLabelText('First show')
+  const secondSearch = screen.getByLabelText('Second show')
+  fireEvent.change(firstSearch, { target: { value: 'Night Watch' } })
+  const secondOptions = document.getElementById(secondSearch.getAttribute('list') || '')
+  expect(secondOptions?.querySelector('option[value="Night Watch"]')).toBeNull()
+  fireEvent.change(secondSearch, { target: { value: 'Kitchen Club' } })
   const table = screen.getByRole('table')
   expect(within(table).getByRole('link', { name: 'Kitchen Club' })).toBeTruthy()
   expect(within(table).getByText('8 / 10')).toBeTruthy()
-  fireEvent.change(firstSelect, { target: { value: '' } })
+  fireEvent.change(screen.getByLabelText('First show'), { target: { value: '' } })
   expect(screen.getByText(/other slot/)).toBeTruthy()
   fireEvent.click(screen.getByRole('button', { name: 'Clear comparison' }))
   expect(screen.queryByRole('table')).toBeNull()
 })
 
-it('filters comparison options with free search', async () => {
+it('filters options while typing inside a comparison field', async () => {
   open('/compare')
-  const search = await screen.findByLabelText('Search shows')
-  const firstSelect = screen.getByLabelText('First show')
-  fireEvent.change(search, { target: { value: 'kitchen' } })
-  expect(within(firstSelect).getByRole('option', { name: 'Kitchen Club' })).toBeTruthy()
-  expect(within(firstSelect).queryByRole('option', { name: 'Night Watch' })).toBeNull()
-
-  fireEvent.change(firstSelect, { target: { value: '2' } })
-  fireEvent.change(search, { target: { value: 'night' } })
-  expect(within(firstSelect).getByRole('option', { name: 'Kitchen Club' })).toBeTruthy()
-  expect(within(firstSelect).getByRole('option', { name: 'Night Watch' })).toBeTruthy()
+  const firstSearch = await screen.findByLabelText('First show')
+  const options = document.getElementById(firstSearch.getAttribute('list') || '')
+  fireEvent.change(firstSearch, { target: { value: 'kit' } })
+  expect(options?.querySelector('option[value="Kitchen Club"]')).toBeTruthy()
+  expect(options?.querySelector('option[value="Night Watch"]')).toBeNull()
 })
 
 it('does not update an unmounted Browse page after navigation', async () => {

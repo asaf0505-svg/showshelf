@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import type { Show } from '../types/show'
 import StatusMessage from '../components/StatusMessage'
 import ShowPoster from '../components/ShowPoster'
+import SearchableShowField from '../components/SearchableShowField'
 import { getComparisonFacts } from '../utils/comparison'
 
 export default function ComparePage() {
@@ -12,7 +13,6 @@ export default function ComparePage() {
   const [attempt, setAttempt] = useState(0)
   const [firstId, setFirstId] = useState('')
   const [secondId, setSecondId] = useState('')
-  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     const controller = new AbortController()
@@ -38,10 +38,6 @@ export default function ComparePage() {
   const first = shows.find(show => String(show.id) === firstId)
   const second = shows.find(show => String(show.id) === secondId)
   const sortedShows = [...shows].sort((a, b) => a.name.localeCompare(b.name))
-  const normalizedSearch = searchQuery.trim().toLocaleLowerCase()
-  const matchingShows = normalizedSearch ? sortedShows.filter(show => show.name.toLocaleLowerCase().includes(normalizedSearch)) : sortedShows
-  const firstOptions = sortedShows.filter(show => matchingShows.includes(show) || String(show.id) === firstId)
-  const secondOptions = sortedShows.filter(show => matchingShows.includes(show) || String(show.id) === secondId)
   const firstFacts = first ? getComparisonFacts(first) : []
   const secondFacts = second ? getComparisonFacts(second) : []
   const labels = ['Rating', 'Genres', 'Status', 'Schedule']
@@ -55,23 +51,9 @@ export default function ComparePage() {
       {!loading && !error && shows.length === 0 && <StatusMessage message="No shows available to compare." />}
       {!loading && !error && shows.length > 0 && <>
         <div className="search-filters compare-filters">
-          <label className="compare-search">Search shows
-            <input type="search" value={searchQuery} placeholder="Type a show name" onChange={event => setSearchQuery(event.target.value)} />
-          </label>
-          {normalizedSearch && matchingShows.length === 0 && <p className="compare-search-result">No shows match your search.</p>}
-          <label>First show
-            <select value={firstId} onChange={event => setFirstId(event.target.value)}>
-              <option value="">Choose a show</option>
-              {firstOptions.map(show => <option key={show.id} value={show.id} disabled={String(show.id) === secondId}>{show.name}</option>)}
-            </select>
-          </label>
-          <label>Second show
-            <select value={secondId} onChange={event => setSecondId(event.target.value)}>
-              <option value="">Choose a show</option>
-              {secondOptions.map(show => <option key={show.id} value={show.id} disabled={String(show.id) === firstId}>{show.name}</option>)}
-            </select>
-          </label>
-          <button disabled={!firstId && !secondId && !searchQuery} onClick={() => { setFirstId(''); setSecondId(''); setSearchQuery('') }}>Clear comparison</button>
+          <SearchableShowField key={`first-${firstId}`} label="First show" shows={sortedShows} selectedId={firstId} unavailableId={secondId} onChange={setFirstId} />
+          <SearchableShowField key={`second-${secondId}`} label="Second show" shows={sortedShows} selectedId={secondId} unavailableId={firstId} onChange={setSecondId} />
+          <button disabled={!firstId && !secondId} onClick={() => { setFirstId(''); setSecondId('') }}>Clear comparison</button>
         </div>
         {!first && !second && <StatusMessage message="Choose your first show to start comparing." />}
         {(first || second) && <>
