@@ -47,6 +47,15 @@ it('filters the loaded list, handles no matches and clears both filters', async 
   expect((screen.getByLabelText('Sort by') as HTMLSelectElement).value).toBe('default')
 })
 
+it('shows available developer picks with their fixed ranks', async () => {
+  open()
+  const topTen = await screen.findByRole('list', { name: 'Developer Top 10' })
+  expect(within(topTen).getByRole('link', { name: 'Peaky Blinders' })).toBeTruthy()
+  expect(within(topTen).getByRole('link', { name: 'Prison Break' })).toBeTruthy()
+  expect(within(topTen).getByLabelText('Rank 4')).toBeTruthy()
+  expect(within(topTen).getByLabelText('Rank 5')).toBeTruthy()
+})
+
 it('navigates to details and renders API HTML as plain text', async () => {
   open()
   fireEvent.click(await screen.findByRole('link', { name: 'Night Watch' }))
