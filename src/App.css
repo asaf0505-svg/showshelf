@@ -56,6 +56,8 @@ body { background: radial-gradient(ellipse at 80% 0%, #26382b 0, transparent 42%
 .brand-dot { color: #d5f277; margin-left: -8px; }
 .site-header nav a { padding: 8px 15px; border-radius: 30px; color: #b5c0b8; font-size: .9rem; }
 .site-header nav a.active { background: #d5f277; color: #172013; border: 0; }
+.favorite-count { display: inline-grid; place-items: center; min-width: 20px; height: 20px; margin-left: 4px; padding: 0 5px; border-radius: 999px; background: #f9d788; color: #172013; font-size: .72rem; font-weight: 800; }
+.site-header nav a.active .favorite-count { background: #172013; color: #d5f277; }
 a { color: #d5f277; }
 .browse-page { max-width: 1320px; padding: 40px 5%; }
 .browse-hero { position: relative; isolation: isolate; overflow: hidden; padding: 48px 40px; border: 1px solid #ffffff12; border-radius: 20px; background: linear-gradient(120deg,#263d30,#17251e 70%); margin-bottom: 48px; }

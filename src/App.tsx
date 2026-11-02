@@ -30,7 +30,7 @@ function App() {
 
   return (
     <>
-      <Navigation />
+      <Navigation favoriteCount={favorites.length} />
       {storageError && <StatusMessage message={storageError} />}
       <Routes>
         <Route path="/" element={<BrowsePage favorites={favorites} onToggleFavorite={handleToggleFavorite} />} />

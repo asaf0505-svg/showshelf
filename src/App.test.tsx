@@ -52,7 +52,10 @@ it('navigates to details and renders API HTML as plain text', async () => {
 
 it('persists favorites across an app remount and removes them', async () => {
   const app = open()
+  const favoritesLink = screen.getByRole('link', { name: 'Favorites' })
+  expect(within(favoritesLink).getByText('0')).toBeTruthy()
   fireEvent.click(await screen.findByRole('button', { name: 'Save Night Watch to favorites' }))
+  expect(within(favoritesLink).getByText('1')).toBeTruthy()
   expect(JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]')[0].id).toBe(1)
   app.unmount()
   open('/favorites')
