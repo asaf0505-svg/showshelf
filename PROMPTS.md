@@ -156,3 +156,9 @@
 **20:29 · codex-manual-fallback**
 
 > תעדכן ב gitub
+
+## 2026-11-02
+
+**12:10 · codex-manual-fallback**
+
+> אוקיי אז תשנה את השמות למה שאמרנו
