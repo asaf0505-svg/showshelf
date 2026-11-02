@@ -51,7 +51,8 @@ h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.15; margin: 16px 0; }
 body { background: radial-gradient(ellipse at 80% 0%, #26382b 0, transparent 42%), #101513; }
 .site-header { max-width: 1440px; margin: auto; padding: 22px 5%; border-color: #ffffff15; }
 .brand { display: flex; align-items: center; gap: 9px; letter-spacing: -1px; font-size: 1.45rem; }
-.brand-mark { display: grid; place-items: center; width: 32px; height: 36px; border-radius: 8px; background: #d5f277; color: #182111; font-size: 1.25rem; transform: rotate(-7deg); }
+.brand-mark { display: grid; place-items: center; width: 32px; height: 36px; border-radius: 8px; background: #d5f277; transform: rotate(-7deg); }
+.brand-play { width: 0; height: 0; margin-left: 3px; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 11px solid #182111; transform: rotate(7deg); }
 .brand-dot { color: #d5f277; margin-left: -8px; }
 .site-header nav a { padding: 8px 15px; border-radius: 30px; color: #b5c0b8; font-size: .9rem; }
 .site-header nav a.active { background: #d5f277; color: #172013; border: 0; }
