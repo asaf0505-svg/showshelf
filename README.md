@@ -4,6 +4,8 @@
 
 Browse the TVmaze catalog, find shows with combined filters, save favorites, compare two titles side by side, and explore a personal Top 10.
 
+[**Live Demo**](https://asaf0505-svg.github.io/showshelf/) · [View the repository](https://github.com/asaf0505-svg/showshelf)
+
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=111827)
 ![TypeScript](https://img.shields.io/badge/TypeScript-7-3178C6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
