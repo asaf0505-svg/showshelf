@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting to ShowShelf</title>
+    <script>
+      ;(function redirectToApp(location) {
+        const projectPathSegments = 1
+        const basePath = location.pathname
+          .split('/')
+          .slice(0, 1 + projectPathSegments)
+          .join('/')
+        const routePath = location.pathname
+          .split('/')
+          .slice(1 + projectPathSegments)
+          .join('/')
+          .replace(/&/g, '~and~')
+        const query = location.search
+          ? `&${location.search.slice(1).replace(/&/g, '~and~')}`
+          : ''
+
+        location.replace(`${location.origin}${basePath}/?/${routePath}${query}${location.hash}`)
+      })(window.location)
+    </script>
+  </head>
+  <body></body>
+</html>
